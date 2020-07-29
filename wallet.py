@@ -13,13 +13,15 @@ private_key = os.getenv("PRIVATE_KEY")
 load_dotenv()
 mnemonic = os.getenv('MNEMONIC', 'insert mnemonic here')
 
-def derive_wallets():
-    command = './derive -g --mnemonic{mnemonic} --coin{coins} --numdrive=3 --fromat = json'
-
+def derive_wallets(coin):
+    command = './derive -g --mnemonic{mnemonic} --coin{coin} --numdrive=3 --fromat = json'
+ 
     p = subprocess.Popen(command, stdout=subprocess.PIPE, shell =True)
     (output, err) = p.communicate()
     p_status = p.wait()
-    coins = {'ETH', 'BTCTEST'}
-    return p_status
+    return print(output)
 
-    
+class coins:
+        def __init__(self, ETH, BTCTEST):
+            self.ETH = derive_wallets(ETH)
+            self.BTCTEST = derive_wallets(BTCTEST)
